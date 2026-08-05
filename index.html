@@ -209,20 +209,20 @@
                             <!-- Form Upload & Atur Tata Letak -->
                             <div class="lg:col-span-5 space-y-6">
                                 
-                                <!-- Card Dimensi Sertifikat -->
+                                <!-- Card Dimensi Sertifikat (Diperbarui ke HD 2400x1700 secara default) -->
                                 <div class="glass-card rounded-2xl p-6 border border-white/80 space-y-4">
                                     <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
                                         <i class="fa-solid fa-expand text-blue-600"></i>
-                                        Ukuran Sertifikat (px)
+                                        Ukuran Sertifikat (px) [Ultra-HD Quality]
                                     </h3>
                                     <div class="grid grid-cols-2 gap-3">
                                         <div>
                                             <label class="block text-xs font-semibold text-slate-600 mb-1">Lebar (Width)</label>
-                                            <input type="number" id="certWidth" value="1200" onchange="updateCanvasDimension()" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl bg-slate-50/50 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                            <input type="number" id="certWidth" value="2400" onchange="updateCanvasDimension()" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl bg-slate-50/50 focus:ring-2 focus:ring-blue-600 focus:outline-none">
                                         </div>
                                         <div>
                                             <label class="block text-xs font-semibold text-slate-600 mb-1">Tinggi (Height)</label>
-                                            <input type="number" id="certHeight" value="850" onchange="updateCanvasDimension()" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl bg-slate-50/50 focus:ring-2 focus:ring-blue-600 focus:outline-none">
+                                            <input type="number" id="certHeight" value="1700" onchange="updateCanvasDimension()" class="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl bg-slate-50/50 focus:ring-2 focus:ring-blue-600 focus:outline-none">
                                         </div>
                                     </div>
                                 </div>
@@ -305,23 +305,23 @@
                                                         <span>Posisi X Nama:</span>
                                                         <span id="posXNameVal" class="font-bold text-blue-600">Center</span>
                                                     </div>
-                                                    <input type="range" id="posXName" min="-1" max="1500" value="-1" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                    <input type="range" id="posXName" min="-1" max="3000" value="-1" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                                 </div>
                                                 <div>
                                                     <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                         <span>Posisi Y Nama:</span>
-                                                        <span id="posYNameVal" class="font-bold text-blue-600">310px</span>
+                                                        <span id="posYNameVal" class="font-bold text-blue-600">620px</span>
                                                     </div>
-                                                    <input type="range" id="posYName" min="50" max="1000" value="310" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                    <input type="range" id="posYName" min="50" max="2000" value="620" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                     <span>Ukuran Font Nama:</span>
-                                                    <span id="fontSizeNameVal" class="font-bold text-blue-600">42px</span>
+                                                    <span id="fontSizeNameVal" class="font-bold text-blue-600">84px</span>
                                                 </div>
-                                                <input type="range" id="fontSizeName" min="10" max="100" value="42" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                <input type="range" id="fontSizeName" min="10" max="200" value="84" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                             </div>
                                         </div>
 
@@ -366,23 +366,23 @@
                                                         <span>Posisi X ID:</span>
                                                         <span id="posXIDVal" class="font-bold text-blue-600">Center</span>
                                                     </div>
-                                                    <input type="range" id="posXID" min="-1" max="1500" value="-1" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                    <input type="range" id="posXID" min="-1" max="3000" value="-1" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                                 </div>
                                                 <div>
                                                     <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                         <span>Posisi Y ID:</span>
-                                                        <span id="posYIDVal" class="font-bold text-blue-600">170px</span>
+                                                        <span id="posYIDVal" class="font-bold text-blue-600">340px</span>
                                                     </div>
-                                                    <input type="range" id="posYID" min="50" max="1000" value="170" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                    <input type="range" id="posYID" min="50" max="2000" value="340" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                                 </div>
                                             </div>
 
                                             <div>
                                                 <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                     <span>Ukuran Font ID:</span>
-                                                    <span id="fontSizeIDVal" class="font-bold text-blue-600">20px</span>
+                                                    <span id="fontSizeIDVal" class="font-bold text-blue-600">40px</span>
                                                 </div>
-                                                <input type="range" id="fontSizeID" min="8" max="60" value="20" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                <input type="range" id="fontSizeID" min="8" max="120" value="40" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                             </div>
                                         </div>
 
@@ -392,23 +392,23 @@
                                             <div>
                                                 <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                     <span>Posisi X QR:</span>
-                                                    <span id="posXQRVal" class="font-bold text-blue-600">100px</span>
+                                                    <span id="posXQRVal" class="font-bold text-blue-600">200px</span>
                                                 </div>
-                                                <input type="range" id="posXQR" min="0" max="1500" value="100" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                <input type="range" id="posXQR" min="0" max="3000" value="200" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                             </div>
                                             <div>
                                                 <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                     <span>Posisi Y QR:</span>
-                                                    <span id="posYQRVal" class="font-bold text-blue-600">560px</span>
+                                                    <span id="posYQRVal" class="font-bold text-blue-600">1120px</span>
                                                 </div>
-                                                <input type="range" id="posYQR" min="0" max="1000" value="560" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                <input type="range" id="posYQR" min="0" max="2000" value="1120" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                             </div>
                                             <div>
                                                 <div class="flex justify-between text-xs text-slate-600 mb-1">
                                                     <span>Ukuran Dimensi QR:</span>
-                                                    <span id="sizeQRVal" class="font-bold text-blue-600">120px</span>
+                                                    <span id="sizeQRVal" class="font-bold text-blue-600">240px</span>
                                                 </div>
-                                                <input type="range" id="sizeQR" min="30" max="400" value="120" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
+                                                <input type="range" id="sizeQR" min="30" max="800" value="240" oninput="updateLayoutPreview()" class="w-full accent-blue-600">
                                             </div>
                                         </div>
 
@@ -422,11 +422,11 @@
                                 <div class="glass-card rounded-2xl p-6 border border-white/80 space-y-4 sticky top-24">
                                     <h3 class="font-bold text-sm text-slate-800 flex items-center justify-between">
                                         <span class="flex items-center gap-2"><i class="fa-regular fa-eye text-blue-600"></i> Live Preview Layout Canvas</span>
-                                        <span id="dimensionTag" class="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full border border-blue-100 font-semibold">1200 x 850 px</span>
+                                        <span id="dimensionTag" class="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-1 rounded-full border border-blue-100 font-semibold">2400 x 1700 px</span>
                                     </h3>
 
                                     <div class="w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-200 flex justify-center items-center p-2">
-                                        <canvas id="adminPreviewCanvas" width="1200" height="850" class="w-full h-auto max-h-[500px] object-contain rounded-lg shadow-sm"></canvas>
+                                        <canvas id="adminPreviewCanvas" width="2400" height="1700" class="w-full h-auto max-h-[500px] object-contain rounded-lg shadow-sm"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -519,7 +519,7 @@
 
     <!-- Element Tersembunyi (Canvas Utama & QR) -->
     <div class="hidden">
-        <canvas id="certCanvas" width="1200" height="850"></canvas>
+        <canvas id="certCanvas" width="2400" height="1700"></canvas>
         <div id="qrcode"></div>
     </div>
 
@@ -761,8 +761,8 @@
         }
 
         function updateCanvasDimension() {
-            const w = document.getElementById('certWidth').value || 1200;
-            const h = document.getElementById('certHeight').value || 850;
+            const w = document.getElementById('certWidth').value || 2400;
+            const h = document.getElementById('certHeight').value || 1700;
 
             const adminCanvas = document.getElementById('adminPreviewCanvas');
             const certCanvas = document.getElementById('certCanvas');
@@ -847,6 +847,10 @@
         function updateLayoutPreview() {
             const canvas = document.getElementById('adminPreviewCanvas');
             const ctx = canvas.getContext('2d');
+            
+            // Mengaktifkan smoothing tingkat tinggi untuk rendering yang tajam
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
 
             const xNameVal = parseInt(document.getElementById('posXName').value);
             const yName = document.getElementById('posYName').value;
@@ -871,7 +875,7 @@
             document.getElementById('fontSizeNameVal').innerText = fontSizeName + 'px';
 
             document.getElementById('posXIDVal').innerText = xIDVal < 0 ? 'Center' : xIDVal + 'px';
-            document.getElementById('posYIDVal').innerText = yID + 'px';
+            document.getElementById('posYIDVal').innerText = xIDVal + 'px';
             document.getElementById('fontSizeIDVal').innerText = fontSizeID + 'px';
 
             document.getElementById('posXQRVal').innerText = xQR + 'px';
@@ -891,7 +895,7 @@
                 
                 ctx.textAlign = "center";
                 ctx.fillStyle = "#94A3B8";
-                ctx.font = "bold 24px sans-serif";
+                ctx.font = "bold 48px sans-serif";
                 ctx.fillText("Belum Ada Template Gambar Terunggah", canvas.width / 2, canvas.height / 2);
             }
 
@@ -914,7 +918,7 @@
                 ctx.fillRect(parseInt(xQR), parseInt(yQR), parseInt(sizeQR), parseInt(sizeQR));
                 ctx.fillStyle = "#FFFFFF";
                 ctx.textAlign = "center";
-                ctx.font = `bold ${Math.max(10, parseInt(sizeQR)/8)}px sans-serif`;
+                ctx.font = `bold ${Math.max(12, parseInt(sizeQR)/8)}px sans-serif`;
                 ctx.fillText("QR CODE", parseInt(xQR) + parseInt(sizeQR)/2, parseInt(yQR) + parseInt(sizeQR)/2 + 4);
             }
         }
@@ -949,9 +953,10 @@
 
         async function uploadGeneratedCertToCloudinary(canvas) {
             return new Promise((resolve) => {
+                // Diubah ke format PNG dengan kualitas maksimum agar tidak buram
                 canvas.toBlob(async (blob) => {
                     const formData = new FormData();
-                    formData.append('file', blob, 'sertifikat.jpg');
+                    formData.append('file', blob, 'sertifikat.png');
                     formData.append('upload_preset', CLOUDINARY_PRESET);
 
                     try {
@@ -965,7 +970,7 @@
                         console.error("Gagal unggah sertifikat ke Cloudinary:", err);
                         resolve(null);
                     }
-                }, 'image/jpeg', 0.92);
+                }, 'image/png', 1.0);
             });
         }
 
@@ -1044,7 +1049,7 @@
             const submitBtn = document.getElementById('submitBtn');
 
             if (isLoading) {
-                btnText.innerText = "Mengunggah & Menggenerasi Sertifikat...";
+                btnText.innerText = "Mengunggah & Menggenerasi Sertifikat HD...";
                 btnSpinner.classList.remove('hidden');
                 submitBtn.disabled = true;
             } else {
@@ -1058,6 +1063,10 @@
             return new Promise((resolve) => {
                 const canvas = document.getElementById('certCanvas');
                 const ctx = canvas.getContext('2d');
+
+                // Mengaktifkan render sharpening/smoothing maksimal
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
 
                 const xNameVal = parseInt(document.getElementById('posXName').value);
                 const yName = parseInt(document.getElementById('posYName').value);
@@ -1110,10 +1119,12 @@
                     
                     const verifyURL = `${window.location.origin}${window.location.pathname}?verify=${data.uuid}`;
 
+                    // QR Code digenerate dalam resolusi tinggi
                     new QRCode(qrContainer, {
                         text: verifyURL,
-                        width: sizeQR,
-                        height: sizeQR
+                        width: Math.max(512, sizeQR * 2),
+                        height: Math.max(512, sizeQR * 2),
+                        correctLevel: QRCode.CorrectLevel.H
                     });
 
                     setTimeout(() => {
@@ -1178,7 +1189,7 @@
 
         function previewCertificate() {
             const canvas = document.getElementById('certCanvas');
-            document.getElementById('previewImage').src = canvas.toDataURL('image/png');
+            document.getElementById('previewImage').src = canvas.toDataURL('image/png', 1.0);
             document.getElementById('previewModal').classList.remove('hidden');
         }
 
@@ -1189,15 +1200,18 @@
         function downloadPDF() {
             const { jsPDF } = window.jspdf;
             const canvas = document.getElementById('certCanvas');
-            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+            
+            // Mengambil ekspor gambar resolusi maksimal (PNG)
+            const imgData = canvas.toDataURL('image/png', 1.0);
 
             const pdf = new jsPDF({
                 orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
                 unit: 'px',
-                format: [canvas.width, canvas.height]
+                format: [canvas.width, canvas.height],
+                compress: false
             });
 
-            pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height, undefined, 'NONE');
             pdf.save(`Sertifikat-${currentCertificateData.fullName.replace(/\s+/g, '_')}.pdf`);
         }
 
