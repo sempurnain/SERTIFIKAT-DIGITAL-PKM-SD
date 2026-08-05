@@ -7,7 +7,7 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome CDN untuk Ikon -->
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- QRCode.js Library CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -48,7 +48,7 @@
         <section id="tab-pendaftaran" class="max-w-2xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 my-8">
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-blue-950">Formulir Pendaftaran Seminar</h2>
-                <p class="text-sm text-slate-500 mt-1">Isi data di bawah ini untuk mendaftar. Data akan otomatis tersimpan, tersinkronisasi ke Spreadsheet, dan sertifikat akan terbit.</p>
+                <p class="text-sm text-slate-500 mt-1">Isi data di bawah ini untuk mendaftar. Data akan tersimpan ke Spreadsheet, dan sertifikat HD akan terbit.</p>
             </div>
 
             <form id="registrationForm" onsubmit="handleRegistration(event)" class="space-y-4">
@@ -94,9 +94,9 @@
                     <i class="fa-solid fa-circle-check text-xl"></i>
                     <h3 class="font-bold text-lg">Pendaftaran & Generasi Sertifikat Berhasil!</h3>
                 </div>
-                <p class="text-sm text-slate-600 mb-4">Sertifikat digital Anda telah terbit, diunggah ke Cloudinary, dan disinkronkan ke Spreadsheet.</p>
+                <p class="text-sm text-slate-600 mb-4">Sertifikat HD Anda telah berhasil diterbitkan dan disinkronkan ke Spreadsheet.</p>
                 <div class="flex flex-wrap gap-3">
-                    <button onclick="downloadPDF()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm rounded-xl shadow transition">Unduh PDF Sertifikat</button>
+                    <button onclick="downloadPDF()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm rounded-xl shadow transition">Unduh PDF Sertifikat (Ultra HD)</button>
                     <button onclick="previewCertificate()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-800 text-white font-medium text-sm rounded-xl shadow transition">Pratinjau Gambar</button>
                     <a id="cloudinaryDirectLink" target="_blank" class="hidden px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-xl shadow transition flex items-center gap-2">
                         <i class="fa-solid fa-cloud-arrow-down"></i>
@@ -110,7 +110,7 @@
         <section id="tab-verifikasi" class="hidden max-w-3xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-200/80 my-8">
             <div class="text-center mb-8">
                 <h2 class="text-2xl font-bold text-blue-950">Cek Keaslian Sertifikat</h2>
-                <p class="text-sm text-slate-500 mt-1">Masukkan Nomor Sertifikat atau UUID unik untuk memverifikasi dokumen ini secara langsung dari Spreadsheet.</p>
+                <p class="text-sm text-slate-500 mt-1">Masukkan Nomor Sertifikat atau UUID unik untuk memverifikasi dokumen secara langsung dari Spreadsheet.</p>
             </div>
 
             <div class="flex gap-2 max-w-xl mx-auto mb-8">
@@ -196,11 +196,12 @@
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                             <div>
                                 <h2 class="text-xl font-bold text-slate-800">Pengaturan Template Sertifikat</h2>
-                                <p class="text-xs text-slate-500 mt-0.5">Atur dimensi canvas, posisi, font, warna, dan ukuran teks serta QR Code.</p>
+                                <p class="text-xs text-slate-500 mt-0.5">Atur tata letak, ukuran canvas, dan preset yang tersimpan langsung di Spreadsheet.</p>
                             </div>
-                            <button onclick="savePresetSettings()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-xs rounded-xl shadow-md transition flex items-center gap-2 self-start sm:self-auto">
+                            <button onclick="savePresetSettings()" id="savePresetBtn" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-xs rounded-xl shadow-md transition flex items-center gap-2 self-start sm:self-auto">
                                 <i class="fa-solid fa-floppy-disk text-sm"></i>
-                                <span>Simpan Preset</span>
+                                <span>Simpan Preset Ke Spreadsheet</span>
+                                <div id="savePresetSpinner" class="hidden animate-spin h-3 w-3 border-2 border-white border-t-transparent rounded-full"></div>
                             </button>
                         </div>
 
@@ -209,7 +210,7 @@
                             <!-- Form Upload & Atur Tata Letak -->
                             <div class="lg:col-span-5 space-y-6">
                                 
-                                <!-- Card Dimensi Sertifikat (Diperbarui ke HD 2400x1700 secara default) -->
+                                <!-- Card Dimensi Sertifikat Ultra HD -->
                                 <div class="glass-card rounded-2xl p-6 border border-white/80 space-y-4">
                                     <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
                                         <i class="fa-solid fa-expand text-blue-600"></i>
@@ -460,7 +461,6 @@
                                         <i class="fa-solid fa-rotate-right"></i>
                                         <span>Refresh</span>
                                     </button>
-                                    <!-- Tombol Reset Data -->
                                     <button onclick="openResetModal()" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs rounded-xl transition flex items-center gap-1 shadow-sm">
                                         <i class="fa-solid fa-trash-can"></i>
                                         <span>Reset Semua Data</span>
@@ -481,7 +481,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="participantTableBody" class="divide-y divide-slate-100">
-                                        <!-- Rendered via Javascript -->
                                     </tbody>
                                 </table>
                             </div>
@@ -505,7 +504,7 @@
                 <h3 class="font-bold text-lg text-slate-800">Konfirmasi Hapus Semua Data</h3>
             </div>
             <p class="text-xs text-slate-600 leading-relaxed">
-                Apakah Anda yakin ingin **menghapus semua data pendaftar**? Tindakan ini akan mengosongkan seluruh isi data pada sistem dan Spreadsheet secara permanen. Tindakan ini **tidak dapat dibatalkan**.
+                Apakah Anda yakin ingin <strong>menghapus semua data pendaftar</strong>? Tindakan ini akan mengosongkan seluruh isi data pada sistem dan Spreadsheet secara permanen.
             </p>
             <div class="flex justify-end gap-2 pt-2">
                 <button onclick="closeResetModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-semibold transition">Batal</button>
@@ -527,7 +526,7 @@
     <div id="previewModal" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl">
             <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
-                <h3 class="font-bold">Pratinjau Sertifikat Digital</h3>
+                <h3 class="font-bold">Pratinjau Sertifikat Digital (Ultra HD)</h3>
                 <button onclick="closePreview()" class="text-slate-400 hover:text-white">&times;</button>
             </div>
             <div class="p-4 flex justify-center bg-slate-100">
@@ -539,7 +538,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT UTAMA & FIREBASE -->
+    <!-- SCRIPT FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { 
@@ -569,8 +568,7 @@
             if (user) {
                 loginForm.classList.add('hidden');
                 adminContent.classList.remove('hidden');
-                loadPresetSettings();
-                if (typeof updateLayoutPreview === 'function') updateLayoutPreview();
+                if (typeof fetchSpreadsheetData === 'function') fetchSpreadsheetData();
             } else {
                 loginForm.classList.remove('hidden');
                 adminContent.classList.add('hidden');
@@ -602,108 +600,115 @@
         };
     </script>
 
-    <!-- SCRIPT CLOUDINARY, SPREADSHEET & KONTROL LAYOUT SERTIFIKAT -->
+    <!-- SCRIPT UTAMA KONTROL LAYOUT & SPREADSHEET -->
     <script>
         const CLOUDINARY_CLOUD_NAME = "dr3evkwcu";
         const CLOUDINARY_PRESET = "Seminar Pengabdian kepada Masyarakat oleh Dosen";
-        const DEFAULT_APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycby0P3V0WFRe0DIg7rEiOnQ5GgYKTvSzCUxf6lGyaHr1NxYiUTjSaTI95AbMyCtzjNi2/exec";
+        const DEFAULT_APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUaOcJO6Yu1HN4ukie8R28fdPOvJIrXuaiXzRhjvT__TvrZ0VzZWtNJTc_r0hw3g4M/exec";
 
-        let currentCertTemplateURL = localStorage.getItem('uploaded_cert_template') || null;
-        let customQrImageURL = localStorage.getItem('uploaded_custom_qr') || null;
+        let currentCertTemplateURL = null;
+        let customQrImageURL = null;
         let appscriptWebhookUrl = DEFAULT_APPSCRIPT_URL;
         let certificatesDB = [];
+        let globalPresetSettings = {};
         let currentCertificateData = null;
 
         let templateImgObj = new Image();
-        if (currentCertTemplateURL) {
-            templateImgObj.src = currentCertTemplateURL;
-        }
-
         let customQrImgObj = new Image();
-        if (customQrImageURL) {
-            customQrImgObj.src = customQrImageURL;
-        }
 
-        // Ambil data dari Spreadsheet saat halaman pertama dimuat
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('spreadsheetDirectBtn').href = appscriptWebhookUrl;
+            const directBtn = document.getElementById('spreadsheetDirectBtn');
+            if (directBtn) directBtn.href = appscriptWebhookUrl;
             fetchSpreadsheetData();
+            
+            // Cek parameter verifikasi dari URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const verifyParam = urlParams.get('verify');
+            if (verifyParam) {
+                switchTab('verifikasi');
+                document.getElementById('verifyInput').value = verifyParam;
+                verifyCertificate(verifyParam);
+            }
         });
 
+        // Sync Data & Settings Langsung dari Google Spreadsheet
         async function fetchSpreadsheetData() {
             if (!appscriptWebhookUrl) return [];
             try {
                 const res = await fetch(appscriptWebhookUrl);
                 const json = await res.json();
-                if (json.result === 'success' && Array.isArray(json.data)) {
-                    certificatesDB = json.data;
-                    renderParticipantTable();
-                    return certificatesDB;
+                
+                if (json.result === 'success') {
+                    if (Array.isArray(json.data)) {
+                        certificatesDB = json.data;
+                        renderParticipantTable();
+                    }
+                    if (json.settings) {
+                        globalPresetSettings = json.settings;
+                        applyLoadedPresetSettings(json.settings);
+                    }
                 }
             } catch (e) {
                 console.error("Gagal mengambil data dari Google Spreadsheet:", e);
             }
-            return [];
+            return certificatesDB;
         }
 
-        function openResetModal() {
-            document.getElementById('resetConfirmModal').classList.remove('hidden');
+        // Terapkan Preset dari Spreadsheet ke Element Form
+        function applyLoadedPresetSettings(settings) {
+            if (!settings) return;
+
+            if (settings.currentCertTemplateURL) {
+                currentCertTemplateURL = settings.currentCertTemplateURL;
+                templateImgObj = new Image();
+                templateImgObj.crossOrigin = "anonymous";
+                templateImgObj.src = currentCertTemplateURL;
+                templateImgObj.onload = () => updateLayoutPreview();
+            }
+
+            if (settings.customQrImageURL) {
+                customQrImageURL = settings.customQrImageURL;
+                customQrImgObj = new Image();
+                customQrImgObj.crossOrigin = "anonymous";
+                customQrImgObj.src = customQrImageURL;
+                customQrImgObj.onload = () => updateLayoutPreview();
+            }
+
+            if (settings.certWidth) document.getElementById('certWidth').value = settings.certWidth;
+            if (settings.certHeight) document.getElementById('certHeight').value = settings.certHeight;
+
+            if (settings.posXName !== undefined) document.getElementById('posXName').value = settings.posXName;
+            if (settings.posYName) document.getElementById('posYName').value = settings.posYName;
+            if (settings.fontSizeName) document.getElementById('fontSizeName').value = settings.fontSizeName;
+            if (settings.colorName) document.getElementById('colorName').value = settings.colorName;
+            if (settings.fontFamilyName) document.getElementById('fontFamilyName').value = settings.fontFamilyName;
+            if (settings.fontStyleName) document.getElementById('fontStyleName').value = settings.fontStyleName;
+
+            if (settings.posXID !== undefined) document.getElementById('posXID').value = settings.posXID;
+            if (settings.posYID) document.getElementById('posYID').value = settings.posYID;
+            if (settings.fontSizeID) document.getElementById('fontSizeID').value = settings.fontSizeID;
+            if (settings.colorID) document.getElementById('colorID').value = settings.colorID;
+            if (settings.fontFamilyID) document.getElementById('fontFamilyID').value = settings.fontFamilyID;
+            if (settings.fontStyleID) document.getElementById('fontStyleID').value = settings.fontStyleID;
+
+            if (settings.posXQR !== undefined) document.getElementById('posXQR').value = settings.posXQR;
+            if (settings.posYQR) document.getElementById('posYQR').value = settings.posYQR;
+            if (settings.sizeQR) document.getElementById('sizeQR').value = settings.sizeQR;
+
+            updateCanvasDimension();
         }
 
-        function closeResetModal() {
-            document.getElementById('resetConfirmModal').classList.add('hidden');
-        }
-
-        async function executeResetData() {
-            const spinner = document.getElementById('resetSpinner');
-            const confirmBtn = document.getElementById('confirmResetBtn');
+        // Simpan Preset Langsung ke Spreadsheet
+        async function savePresetSettings() {
+            const btn = document.getElementById('savePresetBtn');
+            const spinner = document.getElementById('savePresetSpinner');
 
             spinner.classList.remove('hidden');
-            confirmBtn.disabled = true;
+            btn.disabled = true;
 
-            try {
-                await fetch(appscriptWebhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'clear' })
-                });
-
-                certificatesDB = [];
-                renderParticipantTable();
-                closeResetModal();
-                alert('Semua data berhasil di-reset!');
-            } catch (e) {
-                console.error("Gagal memproses reset:", e);
-                alert('Gagal mereset data. Pastikan jaringan terhubung.');
-            } finally {
-                spinner.classList.add('hidden');
-                confirmBtn.disabled = false;
-            }
-        }
-
-        function switchAdminTab(tab) {
-            const viewTemplate = document.getElementById('admin-view-template');
-            const viewPeserta = document.getElementById('admin-view-peserta');
-            const navTemplate = document.getElementById('admin-nav-template');
-            const navPeserta = document.getElementById('admin-nav-peserta');
-
-            if (tab === 'template') {
-                viewTemplate.classList.remove('hidden');
-                viewPeserta.classList.add('hidden');
-                navTemplate.className = "w-full flex items-center space-x-3 px-4 py-2.5 text-xs font-semibold text-blue-600 bg-blue-50/80 rounded-xl transition";
-                navPeserta.className = "w-full flex items-center space-x-3 px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 rounded-xl transition";
-                updateLayoutPreview();
-            } else {
-                viewTemplate.classList.add('hidden');
-                viewPeserta.classList.remove('hidden');
-                navPeserta.className = "w-full flex items-center space-x-3 px-4 py-2.5 text-xs font-semibold text-blue-600 bg-blue-50/80 rounded-xl transition";
-                navTemplate.className = "w-full flex items-center space-x-3 px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-50 rounded-xl transition";
-                fetchSpreadsheetData();
-            }
-        }
-
-        function savePresetSettings() {
             const settings = {
+                currentCertTemplateURL: currentCertTemplateURL || '',
+                customQrImageURL: customQrImageURL || '',
                 certWidth: document.getElementById('certWidth').value,
                 certHeight: document.getElementById('certHeight').value,
                 
@@ -726,38 +731,25 @@
                 sizeQR: document.getElementById('sizeQR').value,
             };
 
-            localStorage.setItem('cert_preset_settings', JSON.stringify(settings));
-            alert('Preset berhasil disimpan!');
-        }
-
-        function loadPresetSettings() {
-            const savedSettings = localStorage.getItem('cert_preset_settings');
-            if (!savedSettings) return;
-
-            const settings = JSON.parse(savedSettings);
-
-            if(settings.certWidth) document.getElementById('certWidth').value = settings.certWidth;
-            if(settings.certHeight) document.getElementById('certHeight').value = settings.certHeight;
-
-            if(settings.posXName !== undefined) document.getElementById('posXName').value = settings.posXName;
-            if(settings.posYName) document.getElementById('posYName').value = settings.posYName;
-            if(settings.fontSizeName) document.getElementById('fontSizeName').value = settings.fontSizeName;
-            if(settings.colorName) document.getElementById('colorName').value = settings.colorName;
-            if(settings.fontFamilyName) document.getElementById('fontFamilyName').value = settings.fontFamilyName;
-            if(settings.fontStyleName) document.getElementById('fontStyleName').value = settings.fontStyleName;
-
-            if(settings.posXID !== undefined) document.getElementById('posXID').value = settings.posXID;
-            if(settings.posYID) document.getElementById('posYID').value = settings.posYID;
-            if(settings.fontSizeID) document.getElementById('fontSizeID').value = settings.fontSizeID;
-            if(settings.colorID) document.getElementById('colorID').value = settings.colorID;
-            if(settings.fontFamilyID) document.getElementById('fontFamilyID').value = settings.fontFamilyID;
-            if(settings.fontStyleID) document.getElementById('fontStyleID').value = settings.fontStyleID;
-
-            if(settings.posXQR) document.getElementById('posXQR').value = settings.posXQR;
-            if(settings.posYQR) document.getElementById('posYQR').value = settings.posYQR;
-            if(settings.sizeQR) document.getElementById('sizeQR').value = settings.sizeQR;
-
-            updateCanvasDimension();
+            try {
+                await fetch(appscriptWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'savePreset',
+                        settings: settings
+                    })
+                });
+                
+                globalPresetSettings = settings;
+                alert('Preset berhasil tersimpan permanen di Spreadsheet!');
+            } catch (err) {
+                console.error("Gagal menyimpan preset ke Spreadsheet:", err);
+                alert("Gagal menyimpan preset. Pastikan koneksi internet stabil.");
+            } finally {
+                spinner.classList.add('hidden');
+                btn.disabled = false;
+            }
         }
 
         function updateCanvasDimension() {
@@ -783,7 +775,6 @@
             const reader = new FileReader();
             reader.onload = function(evt) {
                 customQrImageURL = evt.target.result;
-                localStorage.setItem('uploaded_custom_qr', customQrImageURL);
                 customQrImgObj = new Image();
                 customQrImgObj.src = customQrImageURL;
                 customQrImgObj.onload = () => updateLayoutPreview();
@@ -793,7 +784,6 @@
 
         function resetCustomQr() {
             customQrImageURL = null;
-            localStorage.removeItem('uploaded_custom_qr');
             document.getElementById('customQrInput').value = '';
             updateLayoutPreview();
         }
@@ -822,7 +812,6 @@
 
                 if (data.secure_url) {
                     currentCertTemplateURL = data.secure_url;
-                    localStorage.setItem('uploaded_cert_template', currentCertTemplateURL);
                     
                     templateImgObj = new Image();
                     templateImgObj.crossOrigin = "anonymous";
@@ -833,7 +822,7 @@
 
                     statusDiv.classList.remove('bg-blue-100', 'text-blue-800');
                     statusDiv.classList.add('bg-emerald-100', 'text-emerald-800');
-                    statusDiv.innerText = "Berhasil mengunggah template sertifikat!";
+                    statusDiv.innerText = "Berhasil mengunggah template! Jangan lupa klik 'Simpan Preset'.";
                 } else {
                     throw new Error(data.error ? data.error.message : 'Gagal mengunggah gambar');
                 }
@@ -848,7 +837,6 @@
             const canvas = document.getElementById('adminPreviewCanvas');
             const ctx = canvas.getContext('2d');
             
-            // Mengaktifkan smoothing tingkat tinggi untuk rendering yang tajam
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
 
@@ -875,7 +863,7 @@
             document.getElementById('fontSizeNameVal').innerText = fontSizeName + 'px';
 
             document.getElementById('posXIDVal').innerText = xIDVal < 0 ? 'Center' : xIDVal + 'px';
-            document.getElementById('posYIDVal').innerText = xIDVal + 'px';
+            document.getElementById('posYIDVal').innerText = yID + 'px';
             document.getElementById('fontSizeIDVal').innerText = fontSizeID + 'px';
 
             document.getElementById('posXQRVal').innerText = xQR + 'px';
@@ -933,7 +921,24 @@
             document.getElementById(`nav-${tabName}`).classList.add('bg-blue-800');
 
             if (tabName === 'admin') {
-                loadPresetSettings();
+                updateLayoutPreview();
+            }
+        }
+
+        function switchAdminTab(subTab) {
+            ['template', 'peserta'].forEach(tab => {
+                document.getElementById(`admin-view-${tab}`).classList.add('hidden');
+                const navBtn = document.getElementById(`admin-nav-${tab}`);
+                navBtn.classList.remove('text-blue-600', 'bg-blue-50/80');
+                navBtn.classList.add('text-slate-600', 'hover:bg-slate-50');
+            });
+
+            document.getElementById(`admin-view-${subTab}`).classList.remove('hidden');
+            const activeNav = document.getElementById(`admin-nav-${subTab}`);
+            activeNav.classList.remove('text-slate-600', 'hover:bg-slate-50');
+            activeNav.classList.add('text-blue-600', 'bg-blue-50/80');
+
+            if (subTab === 'template') {
                 updateLayoutPreview();
             }
         }
@@ -953,7 +958,6 @@
 
         async function uploadGeneratedCertToCloudinary(canvas) {
             return new Promise((resolve) => {
-                // Diubah ke format PNG dengan kualitas maksimum agar tidak buram
                 canvas.toBlob(async (blob) => {
                     const formData = new FormData();
                     formData.append('file', blob, 'sertifikat.png');
@@ -1001,7 +1005,7 @@
 
             await fetchSpreadsheetData();
 
-            const isDuplicate = certificatesDB.some(cert => cert.email.toLowerCase() === email.toLowerCase());
+            const isDuplicate = certificatesDB.some(cert => cert.email && cert.email.toLowerCase() === email.toLowerCase());
             if (isDuplicate) {
                 alert('Email ini telah terdaftar sebelumnya!');
                 setLoading(false);
@@ -1016,7 +1020,7 @@
                 phone,
                 school,
                 role,
-                issueDate: '05 Agustus 2026',
+                issueDate: '06 Agustus 2026',
                 certCloudinaryUrl: ''
             };
 
@@ -1049,7 +1053,7 @@
             const submitBtn = document.getElementById('submitBtn');
 
             if (isLoading) {
-                btnText.innerText = "Mengunggah & Menggenerasi Sertifikat HD...";
+                btnText.innerText = "Mengunggah & Menggenerasi Sertifikat Ultra HD...";
                 btnSpinner.classList.remove('hidden');
                 submitBtn.disabled = true;
             } else {
@@ -1059,81 +1063,106 @@
             }
         }
 
+        // FUNGSI GENERATE SERTIFIKAT ULTRA HD SANGAT TAJAM
         function generateCertificateCanvas(data) {
             return new Promise((resolve) => {
                 const canvas = document.getElementById('certCanvas');
                 const ctx = canvas.getContext('2d');
 
-                // Mengaktifkan render sharpening/smoothing maksimal
+                const settings = globalPresetSettings;
+
+                const certW = parseInt(settings.certWidth || document.getElementById('certWidth').value || 2400);
+                const certH = parseInt(settings.certHeight || document.getElementById('certHeight').value || 1700);
+
+                canvas.width = certW;
+                canvas.height = certH;
+
                 ctx.imageSmoothingEnabled = true;
                 ctx.imageSmoothingQuality = 'high';
 
-                const xNameVal = parseInt(document.getElementById('posXName').value);
-                const yName = parseInt(document.getElementById('posYName').value);
-                const fontSizeName = parseInt(document.getElementById('fontSizeName').value);
-                const colorName = document.getElementById('colorName').value;
-                const fontFamilyName = document.getElementById('fontFamilyName').value;
-                const fontStyleName = document.getElementById('fontStyleName').value;
+                // Teks Nama Peserta
+                const xNameVal = parseInt(settings.posXName !== undefined ? settings.posXName : document.getElementById('posXName').value);
+                const yName = parseInt(settings.posYName || document.getElementById('posYName').value);
+                const fontSizeName = parseInt(settings.fontSizeName || document.getElementById('fontSizeName').value);
+                const colorName = settings.colorName || document.getElementById('colorName').value;
+                const fontFamilyName = settings.fontFamilyName || document.getElementById('fontFamilyName').value;
+                const fontStyleName = settings.fontStyleName || document.getElementById('fontStyleName').value;
 
-                const xIDVal = parseInt(document.getElementById('posXID').value);
-                const yID = parseInt(document.getElementById('posYID').value);
-                const fontSizeID = parseInt(document.getElementById('fontSizeID').value);
-                const colorID = document.getElementById('colorID').value;
-                const fontFamilyID = document.getElementById('fontFamilyID').value;
-                const fontStyleID = document.getElementById('fontStyleID').value;
+                // Teks ID Sertifikat
+                const xIDVal = parseInt(settings.posXID !== undefined ? settings.posXID : document.getElementById('posXID').value);
+                const yID = parseInt(settings.posYID || document.getElementById('posYID').value);
+                const fontSizeID = parseInt(settings.fontSizeID || document.getElementById('fontSizeID').value);
+                const colorID = settings.colorID || document.getElementById('colorID').value;
+                const fontFamilyID = settings.fontFamilyID || document.getElementById('fontFamilyID').value;
+                const fontStyleID = settings.fontStyleID || document.getElementById('fontStyleID').value;
 
-                const xQR = parseInt(document.getElementById('posXQR').value);
-                const yQR = parseInt(document.getElementById('posYQR').value);
-                const sizeQR = parseInt(document.getElementById('sizeQR').value);
+                // QR Code / Logo
+                const xQR = parseInt(settings.posXQR !== undefined ? settings.posXQR : document.getElementById('posXQR').value);
+                const yQR = parseInt(settings.posYQR || document.getElementById('posYQR').value);
+                const sizeQR = parseInt(settings.sizeQR || document.getElementById('sizeQR').value);
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                if (currentCertTemplateURL && templateImgObj.complete) {
-                    ctx.drawImage(templateImgObj, 0, 0, canvas.width, canvas.height);
+                const renderElements = () => {
+                    // Teks Nomor Sertifikat
+                    const realXID = xIDVal < 0 ? canvas.width / 2 : xIDVal;
+                    ctx.textAlign = xIDVal < 0 ? "center" : "left";
+                    ctx.fillStyle = colorID;
+                    ctx.font = `${fontStyleID} ${fontSizeID}px ${fontFamilyID}`;
+                    ctx.fillText(`NO: ${data.certNumber}`, realXID, yID);
+
+                    // Teks Nama Peserta
+                    const realXName = xNameVal < 0 ? canvas.width / 2 : xNameVal;
+                    ctx.textAlign = xNameVal < 0 ? "center" : "left";
+                    ctx.fillStyle = colorName;
+                    ctx.font = `${fontStyleName} ${fontSizeName}px ${fontFamilyName}`;
+                    ctx.fillText(data.fullName, realXName, yName);
+
+                    // Gambar QR / Custom Logo
+                    if (customQrImageURL && customQrImgObj.complete) {
+                        ctx.drawImage(customQrImgObj, xQR, yQR, sizeQR, sizeQR);
+                        resolve();
+                    } else {
+                        const qrContainer = document.getElementById('qrcode');
+                        qrContainer.innerHTML = '';
+                        
+                        const verifyURL = `${window.location.origin}${window.location.pathname}?verify=${data.uuid}`;
+
+                        new QRCode(qrContainer, {
+                            text: verifyURL,
+                            width: Math.max(512, sizeQR * 2),
+                            height: Math.max(512, sizeQR * 2),
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+
+                        setTimeout(() => {
+                            const qrImg = qrContainer.querySelector('img');
+                            if (qrImg) {
+                                ctx.drawImage(qrImg, xQR, yQR, sizeQR, sizeQR);
+                            }
+                            resolve();
+                        }, 300);
+                    }
+                };
+
+                const templateURL = settings.currentCertTemplateURL || currentCertTemplateURL;
+                if (templateURL) {
+                    const bgImg = new Image();
+                    bgImg.crossOrigin = "anonymous";
+                    bgImg.src = templateURL;
+                    bgImg.onload = () => {
+                        ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+                        renderElements();
+                    };
+                    bgImg.onerror = () => {
+                        ctx.fillStyle = "#FFFFFF";
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        renderElements();
+                    };
                 } else {
                     ctx.fillStyle = "#FFFFFF";
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    ctx.strokeStyle = "#1E3A8A";
-                    ctx.lineWidth = 12;
-                    ctx.strokeRect(30, 30, canvas.width - 60, canvas.height - 60);
-                }
-
-                const realXID = xIDVal < 0 ? canvas.width / 2 : xIDVal;
-                ctx.textAlign = xIDVal < 0 ? "center" : "left";
-                ctx.fillStyle = colorID;
-                ctx.font = `${fontStyleID} ${fontSizeID}px ${fontFamilyID}`;
-                ctx.fillText(`NO: ${data.certNumber}`, realXID, yID);
-
-                const realXName = xNameVal < 0 ? canvas.width / 2 : xNameVal;
-                ctx.textAlign = xNameVal < 0 ? "center" : "left";
-                ctx.fillStyle = colorName;
-                ctx.font = `${fontStyleName} ${fontSizeName}px ${fontFamilyName}`;
-                ctx.fillText(data.fullName, realXName, yName);
-
-                if (customQrImageURL && customQrImgObj.complete) {
-                    ctx.drawImage(customQrImgObj, xQR, yQR, sizeQR, sizeQR);
-                    resolve();
-                } else {
-                    const qrContainer = document.getElementById('qrcode');
-                    qrContainer.innerHTML = '';
-                    
-                    const verifyURL = `${window.location.origin}${window.location.pathname}?verify=${data.uuid}`;
-
-                    // QR Code digenerate dalam resolusi tinggi
-                    new QRCode(qrContainer, {
-                        text: verifyURL,
-                        width: Math.max(512, sizeQR * 2),
-                        height: Math.max(512, sizeQR * 2),
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
-
-                    setTimeout(() => {
-                        const qrImg = qrContainer.querySelector('img');
-                        if (qrImg) {
-                            ctx.drawImage(qrImg, xQR, yQR, sizeQR, sizeQR);
-                        }
-                        resolve();
-                    }, 300);
+                    renderElements();
                 }
             });
         }
@@ -1187,6 +1216,41 @@
             `).join('');
         }
 
+        function openResetModal() {
+            document.getElementById('resetConfirmModal').classList.remove('hidden');
+        }
+
+        function closeResetModal() {
+            document.getElementById('resetConfirmModal').classList.add('hidden');
+        }
+
+        async function executeResetData() {
+            const spinner = document.getElementById('resetSpinner');
+            const confirmBtn = document.getElementById('confirmResetBtn');
+
+            spinner.classList.remove('hidden');
+            confirmBtn.disabled = true;
+
+            try {
+                await fetch(appscriptWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'clear' })
+                });
+
+                certificatesDB = [];
+                renderParticipantTable();
+                closeResetModal();
+                alert('Semua data berhasil di-reset!');
+            } catch (e) {
+                console.error("Gagal memproses reset:", e);
+                alert('Gagal mereset data. Pastikan jaringan terhubung.');
+            } finally {
+                spinner.classList.add('hidden');
+                confirmBtn.disabled = false;
+            }
+        }
+
         function previewCertificate() {
             const canvas = document.getElementById('certCanvas');
             document.getElementById('previewImage').src = canvas.toDataURL('image/png', 1.0);
@@ -1194,6 +1258,7 @@
         }
 
         function closePreview() {
+            document.getElementById('previewModal').classList.hidden = true;
             document.getElementById('previewModal').classList.add('hidden');
         }
 
@@ -1201,7 +1266,6 @@
             const { jsPDF } = window.jspdf;
             const canvas = document.getElementById('certCanvas');
             
-            // Mengambil ekspor gambar resolusi maksimal (PNG)
             const imgData = canvas.toDataURL('image/png', 1.0);
 
             const pdf = new jsPDF({
@@ -1212,7 +1276,10 @@
             });
 
             pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height, undefined, 'NONE');
-            pdf.save(`Sertifikat-${currentCertificateData.fullName.replace(/\s+/g, '_')}.pdf`);
+            const name = currentCertificateData && currentCertificateData.fullName 
+                ? currentCertificateData.fullName.replace(/\s+/g, '_') 
+                : 'Peserta';
+            pdf.save(`Sertifikat-${name}.pdf`);
         }
 
         async function verifyCertificate(forcedUUID = null) {
@@ -1239,7 +1306,7 @@
                 resultDiv.className = "border border-emerald-200 bg-emerald-50 p-6 rounded-2xl text-emerald-950";
                 resultDiv.innerHTML = `
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="p-2 bg-emerald-600 text-white rounded-full"><i class="fa-solid fa-check"></i></span>
+                        <span class="p-2 bg-emerald-600 text-white rounded-full flex items-center justify-center w-8 h-8"><i class="fa-solid fa-check"></i></span>
                         <div>
                             <h3 class="font-bold text-lg text-emerald-900">SERTIFIKAT RELEVAN & VALID</h3>
                             <p class="text-xs text-emerald-700">Telah terverifikasi secara online oleh Sistem Keaslian PKM-SD</p>
@@ -1264,7 +1331,7 @@
                 resultDiv.className = "border border-rose-200 bg-rose-50 p-6 rounded-2xl text-rose-900";
                 resultDiv.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <span class="p-2 bg-rose-600 text-white rounded-full"><i class="fa-solid fa-xmark"></i></span>
+                        <span class="p-2 bg-rose-600 text-white rounded-full flex items-center justify-center w-8 h-8"><i class="fa-solid fa-xmark"></i></span>
                         <div>
                             <h3 class="font-bold text-lg text-rose-900">SERTIFIKAT TIDAK DITEMUK</h3>
                             <p class="text-xs text-rose-700">Data nomor sertifikat atau UUID tidak terdaftar di Spreadsheet.</p>
