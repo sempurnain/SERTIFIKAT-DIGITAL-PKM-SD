@@ -97,7 +97,10 @@
                 <p class="text-sm text-slate-600 mb-4">Sertifikat HD Anda telah berhasil diterbitkan dan disinkronkan ke Spreadsheet.</p>
                 <div class="flex flex-wrap gap-3">
                     <button onclick="downloadPDF()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm rounded-xl shadow transition">Unduh PDF Sertifikat (Ultra HD)</button>
-                    <button onclick="previewCertificate()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-800 text-white font-medium text-sm rounded-xl shadow transition">Pratinjau Gambar</button>
+                    <button onclick="previewCertificate()" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-800 text-white font-medium text-sm rounded-xl shadow transition flex items-center gap-2">
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Pratinjau Gambar</span>
+                    </button>
                     <a id="cloudinaryDirectLink" target="_blank" class="hidden px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-xl shadow transition flex items-center gap-2">
                         <i class="fa-solid fa-cloud-arrow-down"></i>
                         <span>Buka Link Cloudinary</span>
@@ -1024,6 +1027,8 @@
                 certCloudinaryUrl: ''
             };
 
+            currentCertificateData = certData;
+
             const certCanvas = document.getElementById('certCanvas');
             await generateCertificateCanvas(certData);
 
@@ -1032,7 +1037,6 @@
 
             await syncToGoogleSpreadsheet(certData);
             await fetchSpreadsheetData();
-            currentCertificateData = certData;
 
             setLoading(false);
             
@@ -1251,7 +1255,15 @@
             }
         }
 
-        function previewCertificate() {
+        async function previewCertificate() {
+            const dataToPreview = currentCertificateData || {
+                fullName: document.getElementById('regFullName')?.value.trim() || "Dr. Contoh Nama Peserta, M.Pd.",
+                certNumber: "PKM-SD/2026/000001",
+                uuid: "00000000-0000-0000-0000-000000000000"
+            };
+
+            await generateCertificateCanvas(dataToPreview);
+
             const canvas = document.getElementById('certCanvas');
             document.getElementById('previewImage').src = canvas.toDataURL('image/png', 1.0);
             document.getElementById('previewModal').classList.remove('hidden');
